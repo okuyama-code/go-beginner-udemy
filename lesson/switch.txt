@@ -1,0 +1,145 @@
+package main
+
+import (
+	"fmt"
+	// "strconv"
+)
+
+func main () {
+	// n := 6
+	// switch n {
+	// case 1, 2:
+	// 	fmt.Println("1 or 2")
+	// case 3, 4:
+	// 	fmt.Println("3 or 4")
+	// default:
+	// 	fmt.Println("I don't Know")
+	// }
+
+	// switch n := 2; n {
+	// case 1,2:
+	// 	fmt.Println("1 or 2")
+	// case 3, 4:
+	// 		fmt.Println("3 or 4")
+	// 	default:
+	// 		fmt.Println("I don't Know")
+	// }
+
+		// n := 6
+		// switch {
+		// case n > 0 && n < 4:
+		// 	fmt.Println("0 < n < 4")
+		// case n > 3 && n < 7:
+		// 	fmt.Println("3 < n <7")
+		// }
+
+		switch n := 2; n {
+			case 1,2:
+				fmt.Println("1 or 2")
+			case 3, 4:
+					fmt.Println("3 or 4")
+			case n > 3 && n < 6:  //エラー 　列挙型と演算子型は混在できない
+				fmt.Println("3 < n < 6")
+				default:
+					fmt.Println("I don't Know")
+			}
+
+
+}
+
+
+package main
+
+import "fmt"
+
+// anythingは任意の値を受け取り、その値を出力します
+func anything(a interface{}) {
+	fmt.Println(a)
+}
+
+func main() {
+	// "aaa"を引数としてanythingを呼び出す
+	anything("aaa")
+
+	// 1を引数としてanythingを呼び出す
+	anything(1)
+
+	// xという名前のinterface{}型の変数を宣言し、値3を格納します
+	var x interface{} = 3
+
+	// xをint型としてアサーションし、iという名前の変数に代入します
+	i := x.(int)
+
+	// iに2を加えて出力します
+	fmt.Println(i + 2)
+}
+このコードは、Go言語におけるインターフェースの使用例を示しています。
+
+anything関数は、interface{}型の引数aを受け取り、その値をfmt.Printlnを使って出力します。Goでは、interface{}型は任意の型の値を保持する空のインターフェースとして使用されます。
+
+main関数では、まずanything関数を文字列"aaa"と整数1で呼び出しています。これにより、anything関数がそれぞれの引数を受け取り、値を出力します。
+
+次に、interface{}型の変数xを宣言し、値3を格納します。その後、アサーション（型アサーション）を使ってxをint型としてアサート（変換）し、iという名前の変数に代入します。
+
+最後に、iに2を加えて出力します。結果として、値5が出力されます。
+
+
+package main
+
+import "fmt"
+
+//型スイッチ
+
+
+func anything(a interface{}) {
+	// fmt.Println(a)
+	switch v := a.(type) {
+	case string:
+		fmt.Println(v + "!")
+	case int:
+		fmt.Println(v + 3000)
+	}
+}
+
+func main() {
+	anything("aaa")
+	anything(1)
+
+	var x interface{} = 3
+	i, isInt := x.(int)
+	fmt.Println(i, isInt)
+
+	f, isFloat64 := x.(float64)
+	fmt.Println(f, isFloat64)
+
+	if x == nil {
+		fmt.Println("None")
+	} else if i, isInt := x.(int); isInt {
+		fmt.Println(i, "x is Int")
+	} else if s, isString := x.(string); isString {
+		fmt.Println(s, isString)
+	} else {
+		fmt.Println("I don't Know")
+	}
+
+	switch x.(type) {
+	case int:
+		fmt.Println("int")
+	case string:
+		fmt.Println("string")
+	default:
+		fmt.Println("I don't Know")
+	}
+
+	switch v := x.(type) {
+	case bool:
+		fmt.Println(v, "bool")
+	case int:
+		fmt.Println(v, "int")
+	case string:
+		fmt.Println(v, "string")
+
+	}
+
+
+}

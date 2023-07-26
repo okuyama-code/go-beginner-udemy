@@ -1,0 +1,33 @@
+算術演算子
+
+package main
+
+import (
+	"fmt"
+)
+
+
+
+func main() {
+	fmt.Println(1 + 2)
+	fmt.Println(1 - 2)
+	fmt.Println(3 * 2)
+	fmt.Println(60 / 2)
+	fmt.Println(9 % 4)
+
+	fmt.Println("ABC" + "DEF")
+
+	n := 0
+	n += 4
+	fmt.Println(n)
+	n++
+	fmt.Println(n)
+	n--
+	fmt.Println(n)
+
+	s := "ABC"
+	s += "DEF"
+	fmt.Println(s)
+
+
+}

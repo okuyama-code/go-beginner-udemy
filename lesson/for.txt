@@ -1,0 +1,118 @@
+package main
+
+import (
+	"fmt"
+	// "strconv"
+)
+
+func main () {
+	// i := 0
+	// for {
+	// 	i++
+	// 	if i == 3 {
+	// 		break
+	// 	}
+	// 	fmt.Println("Loop")
+	// }
+
+		// point := 0
+		// for point < 10 {
+		// 	fmt.Println(point)
+		// 	point++
+		// }
+
+		// for i := 0; i < 10; i++ {
+		// 	if i == 3 {
+		// 		continue  //3をスキップしてfor文に戻る
+		// 	}
+		// 	if i == 6 {
+		// 		break //6の処理はされず強制終了する
+		// 	}
+		// 	fmt.Println(i)
+		// }
+
+		// arr := [3]int{1,2,3}
+		// for i := 0; i < len(arr); i++ {
+		// 	fmt.Println(arr[i])
+		// }
+
+		// arr := [3]int{1, 2, 3}
+
+		// // 配列の要素とインデックスに対してループします
+		// for i, v := range arr {
+		// 	fmt.Println(i, v)
+		// }
+
+		// sl := []string{"ruby", "php", "go"}
+		// for i, v := range sl {
+		// 	fmt.Println(i, v)
+		// }
+
+		m := map[string]int{"apple":100, "banana":200}
+
+		for k, _ := range m {
+			fmt.Println(k)    //apple 100
+			                     // banana 200
+		}
+
+}
+
+package main
+
+import "fmt"
+
+func main() {
+	arr := [3]int{1, 2, 3}
+
+	// 配列の要素とインデックスに対してループします
+	for i, v := range arr {
+		fmt.Println(i, v)
+	}
+}
+このコードでは、長さ3の整数型配列arrを宣言して初期化しています。配列の要素には1、2、3が格納されています。
+
+forループの中では、rangeキーワードを使ってarrの要素とインデックスに対して反復処理を行います。rangeは、配列やスライスなどの要素を順番に取り出すために使用されます。
+
+ループの各反復で、i変数にはインデックスが、v変数には配列の要素が代入されます。そして、fmt.Println関数を使ってインデックスと要素の値を表示しています。
+
+上記のコードを実行すると、以下の出力が得られます。
+
+0 1
+1 2
+2 3
+つまり、配列arrの最初の要素はインデックス0であり、値は1です。2番目の要素はインデックス1であり、値は2です。最後の要素はインデックス2であり、値は3です。
+
+このようにして、rangeキーワードを使用して配列の要素とインデックスに簡単にアクセスできます。
+
+
+//ラベル付きfor
+package main
+
+import "fmt"
+
+
+func main() {
+	// Loop:
+	// for {
+	// 	for {
+	// 		for {
+	// 			fmt.Println("start")
+	// 			break Loop
+	// 		}
+	// 		fmt.Println("処理をしない")
+	// 	}
+	// 	fmt.Println("処理をしない")
+	// }
+	// fmt.Println("END")
+
+	Loop:
+		for i := 0; i < 3; i++ {
+			for j := 1; j < 3; j++ {
+				if j > 1 {
+					continue Loop
+				}
+				fmt.Println(i, j, i*j)
+			}
+			fmt.Println("処理しない")
+		}
+}

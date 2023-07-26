@@ -1,0 +1,108 @@
+名前付き関数
+
+package main
+
+import (
+	"fmt"
+)
+
+func Plus(x int, y int) int { // ()intは引数の型と　外のintは返り値の型
+	return x + y //int型の返り値　returnで値を返す時は　返り値の型を指定する必要になる
+}
+
+func Div(x,y int) (int, int) {
+	q := x / y
+	r := x % y
+	return q, r //返り値が二つある　だから(int, int)
+}
+
+func Double(price int) (result int) { //返り値に変数も指定できる。変数resultを宣言。
+	result = price * 2 //resultにpriceの２倍の値を入れる
+	return //(result int)で指定してるのでreturnの中身は省略できる
+}
+
+func Noreturn() { //返り値がない関数
+	fmt.Println("No Return")
+	return
+}
+
+func main() {
+
+i := Plus(1, 2)
+fmt.Println(i)
+
+i2, i3 := Div(9, 3)
+fmt.Println(i2, i3)
+
+i4, _ := Div(12, 3) // _にすることで返り値を破棄できる。qの値だけを受け取ることができる。rは破棄。
+fmt.Println(i4)
+
+i5 := Double(1000)
+fmt.Println(i5)
+
+Noreturn()
+}
+
+
+// 関数を返す関数
+
+package main
+
+import "fmt"
+
+// ReturnFunc 関数は、無名の関数を返します。
+// 無名の関数は、`func()`という形式で表され、引数も返り値も持たない関数です。
+func ReturnFunc() func() {
+	return func() {
+		fmt.Println("function")
+	}
+}
+
+func main() {
+	// ReturnFunc関数を呼び出して、返された無名の関数を変数fに代入します。
+	f := ReturnFunc()
+
+	// 変数fに代入された無名の関数を実行します。
+	f() // 結果：function
+}
+上記のコードは、Go言語での関数の概念を説明するためのサンプルです。このコードを実行すると、"function"という文字列が出力されます。
+
+具体的に説明すると、以下のような流れでプログラムが実行されます：
+
+ReturnFunc 関数は、引数も返り値も持たない無名の関数を返す関数です。
+ReturnFunc 関数が呼び出されると、無名の関数が作成され、そのまま返されます。
+main 関数内で、ReturnFunc 関数を呼び出し、返された無名の関数を変数 f に代入します。
+f() という形式で変数 f を関数として呼び出すと、無名の関数が実行されます。
+無名の関数内のコード fmt.Println("function") が実行され、"function"という文字列が出力されます。
+このように、関数を値として扱うことができるGo言語の特徴を活用して、関数を返す関数を作成し、それを呼び出す例を示しています。
+
+
+// 関数を引数にとる関数
+
+package main
+
+import "fmt"
+
+// CallFunction 関数は、引数として受け取った関数を実行します。
+// 引数 `f` は、引数も返り値も持たない関数です。
+func CallFunction(f func()) {
+	f()
+}
+
+func main() {
+	// CallFunction関数を呼び出し、無名の関数を引数として渡します。
+	CallFunction(func() {
+		fmt.Println("function2")
+	})
+}
+上記のコードは、Go言語での関数を引数として渡す例を示しています。このコードを実行すると、"function2"という文字列が出力されます。
+
+具体的に説明すると、以下のような流れでプログラムが実行されます：
+
+CallFunction 関数は、引数として受け取った関数を実行する関数です。
+引数 f は、引数も返り値も持たない関数を受け取るための型指定です。
+main 関数内で、CallFunction 関数を呼び出します。
+引数として、無名の関数を定義して渡します。この無名の関数は、fmt.Println("function2") というコードを実行します。
+CallFunction 関数内部では、引数として受け取った関数 f を実行します。
+渡された無名の関数が実行され、"function2"という文字列が出力されます。
+このように、Go言語では関数を値として扱うことができるため、関数を引数として別の関数に渡すことが可能です。CallFunction 関数は、渡された関数を実行するための汎用的な構造を持っており、その関数の実装によって様々な処理を行うことができます。

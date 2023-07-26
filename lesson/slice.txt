@@ -1,0 +1,165 @@
+package main
+
+import (
+	"fmt"
+
+)
+
+func main() {
+	var sl []int
+	fmt.Println(sl)
+
+	var sl2 []int = []int{100, 200}
+	fmt.Println(sl2)
+
+	sl3 := []string{"A", "B"}
+	fmt.Println(sl3)
+
+	sl4 := make([]int, 5)
+	fmt.Println(sl4)
+
+	sl2[0] = 1000
+	fmt.Println(sl2)
+
+	sl5 := []int{1,2,3,4,5}
+	fmt.Println(sl5)
+
+	fmt.Println(sl5[0])
+
+	fmt.Println(sl5[2:4]) //2番から４番の手前までという意味
+
+	fmt.Println(sl5[:2]) //２番の手前まで
+
+	fmt.Println(sl5[2:]) //2番の３から最後まで
+
+	fmt.Println(sl5[:])
+
+	fmt.Println(sl5[len(sl5)-1]) //最後の要素を取り出す
+
+	fmt.Println(sl5[1: len(sl5)-1]) //最初と最後の要素を取り除いたものを取り出す
+}
+
+
+//append make len cap
+
+func main() {
+	sl := []int{100, 200}
+	fmt.Println(sl)
+
+	sl = append(sl, 300) //最後に追加
+	fmt.Println(sl)
+
+	sl = append(sl, 400,500,600)
+	fmt.Println(sl)
+
+	sl2 := make([]int, 5)
+	fmt.Println(sl2)
+
+	fmt.Println(len(sl2))
+
+	fmt.Println(cap(sl2))
+
+	sl3 := make([]int, 5, 10) //第二引数が要素数　第三引数が容量
+
+	fmt.Println(len(sl3))
+
+	fmt.Println(cap(sl3)) //メモリを気にするときに容量を気にする
+
+	sl3 = append(sl3, 1,2,3,4,5,6,7)
+
+	fmt.Println(len(sl3))
+
+	fmt.Println(cap(sl3))
+
+}
+
+
+//copy
+
+func main() {
+	sl := []int{1,2,3,4,5}
+	sl2 := make([]int, 5, 10)
+	fmt.Println(sl2)
+	n := copy(sl2, sl) //コピー先　コピー元  nはコピーに成功した数を表す
+	fmt.Println(n, sl2)
+}
+
+//for
+
+func main() {
+	sl := []string{"A","B","C"}
+	fmt.Println(sl)
+
+	// for i, v := range sl {
+	// 	fmt.Println(i, v)
+	// }
+
+	for i := 0; i < len(sl); i++ {
+		fmt.Println(sl[i])
+	}
+}
+
+
+
+package main
+
+import "fmt"
+
+// 可変長引数を受け取り、それらの値の合計を返す関数
+func Sum(s ...int) int {
+	n := 0
+	for _, v := range s {
+		n += v
+	}
+	return n
+}
+
+func main() {
+	// Sum関数に引数1, 2, 3を渡し、結果を出力
+	fmt.Println(Sum(1, 2, 3))
+
+	// Sum関数に引数1, 2, 3, 4, 5を渡し、結果を出力
+	fmt.Println(Sum(1, 2, 3, 4, 5))
+
+	// 引数を指定せずにSum関数を呼び出し、結果を出力
+	fmt.Println(Sum())
+
+	// スライスslに値1, 2, 3を設定し、Sum関数に渡す（...を使用してスライスを展開）
+	sl := []int{1, 2, 3}
+	fmt.Println(Sum(sl...))
+}
+
+このコードでは、可変長引数（...int）を受け取り、それらの値の合計を計算して返すSum関数が定義されています。
+
+main関数では、いくつかの異なる方法でSum関数を呼び出し、結果を出力しています。
+
+Sum(1, 2, 3)：引数として1, 2, 3を渡し、それらの合計を計算します。結果は6と出力されます。
+Sum(1, 2, 3, 4, 5)：引数として1, 2, 3, 4, 5を渡し、それらの合計を計算します。結果は15と出力されます。
+Sum()：引数を指定せずにSum関数を呼び出します。この場合、合計する要素がないため、結果は0と出力されます。
+スライスslに値1, 2, 3を設定し、Sum(sl...)として呼び出します。...を使用してスライスを展開して引数として渡すことができます。この場合、スライスの要素の合計が計算され、結果である6が出力されます。
+このように、Sum関数は異なる数の引数やスライスを受け取ることができ、それらの値の合計を正確に計算します。
+
+
+可変長引数（variadic arguments）は、関数が任意の数の引数を受け取るための機能です。Go言語では、可変長引数を表すために...を使用します。
+
+...intは、整数型の引数を0個以上受け取ることができる可変長引数を表します。関数が可変長引数を受け取る場合、引数の数に制限がなく、引数を個別の要素として扱うことができます。
+
+可変長引数を受け取る関数では、引数の型の後に...を追加します。例えば、func Sum(s ...int) intという関数定義では、Sum関数は整数型の引数を任意の数受け取ることができます。
+
+関数内では、可変長引数はスライスとして扱われます。具体的には、関数内でrange文を使って可変長引数をイテレートすることができます。
+
+以下は、可変長引数を使用したSum関数の例です。
+
+
+func Sum(s ...int) int {
+	n := 0
+	for _, v := range s {
+		n += v
+	}
+	return n
+}
+このSum関数は、与えられた整数の可変長引数sを合計して返します。引数としてSum(1, 2, 3)のように値を渡すと、内部でスライスとして扱われ、それらの値の合計が計算されます。
+
+例えば、fmt.Println(Sum(1, 2, 3, 4, 5))は、引数として1, 2, 3, 4, 5を渡し、それらの合計である15が出力されます。
+
+可変長引数は、関数を柔軟に設計するための便利な機能であり、異なる数の引数を受け取る必要がある場合に特に役立ちます。
